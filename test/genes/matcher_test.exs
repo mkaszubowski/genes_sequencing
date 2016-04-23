@@ -9,4 +9,18 @@ defmodule Genes.MatcherTest do
     assert Matcher.matching_chars("ACCA", "ACAD") == 1
     assert Matcher.matching_chars("AAAA", "CCCC") == 0
   end
+
+  test ".sorted successors" do
+    seq = "ACGT"
+    all = ["ACGT", "AAAA", "GTAA", "CGTA", "TAAA"]
+
+    expected = [
+      {"CGTA", 3},
+      {"GTAA", 2},
+      {"TAAA", 1},
+      {"AAAA", 0}
+    ]
+
+    assert Matcher.sorted_successors(seq, all) == expected
+  end
 end
